@@ -1,0 +1,25 @@
+{
+  "name": "expressively-mocked-fetch",
+  "version": "0.0.1",
+  "description": "A fetch mock that launches express as a child_process",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "keywords": [
+    "express",
+    "fetch",
+    "fetch",
+    "mock",
+    "test"
+  ],
+  "author": "Tim Daubenschütz <tim@daubenschuetz.de> (https://timdaub.github.io)",
+  "dependencies": {
+    "express": "4.17.1",
+    "tmp": "0.2.1"
+  },
+  "devDependencies": {
+    "ava": "3.10.1",
+    "cross-fetch": "3.0.5"
+  }
+}
