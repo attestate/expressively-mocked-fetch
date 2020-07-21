@@ -8,6 +8,10 @@ const fileName = ".expressively-mocked-fetch-tmp";
 const template = fn => `
 const express = require('express');
 const app = express();
+app.use(function(req, res, next) {
+  next();
+  process.exit();
+});
 ${fn}
 let server = app.listen(0, function () {
   process.send("PORT:"+server.address().port);
