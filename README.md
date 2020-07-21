@@ -19,7 +19,7 @@ a whole API (express.js), when you can just use it...
 
 ## Usage
 
-See [test file](./test/index.text.js).
+See [test file](./test/index.test.js).
 
 ## LICENSE
 
