@@ -1,14 +1,17 @@
 # expressively-mocked-fetch
 
-> A fetch mock that launches express as a child_process.
+> A fetch mock that launches express as a child_process to help testing.
 
 ## Installation
 
-[WIP]
+```bash
+$ npm i -D expressively-mocked-fetch
+```
 
 ## Why
 
-I saw [msw](https://github.com/mswjs/msw). But it was [too
+[Mocking fetch is annoying](https://kentcdodds.com/blog/stop-mocking-fetch).  I
+saw [msw](https://github.com/mswjs/msw). But it was [too
 static](https://github.com/mswjs/msw/issues/287) for me. Also: Why reimplement
 a whole API (express.js), when you can just use it...
 
@@ -20,6 +23,12 @@ a whole API (express.js), when you can just use it...
 ## Usage
 
 See [test file](./test/index.test.js).
+
+## Changelog
+
+### 0.0.1
+
+- Initial release
 
 ## LICENSE
 
