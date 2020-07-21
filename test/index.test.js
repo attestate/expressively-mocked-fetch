@@ -7,21 +7,14 @@ const PORT = 3000;
 
 test("if module is loaded and executed", async t => {
   const worker = await createWorker(`
-  var express = require('express');
-  var app = express();
-  
-  app.get('/', function (req, res) {
-    res.send("OK");
-  });
-  
-  app.listen(${PORT}, function () {
-    console.log("${`Example app listening on port ${PORT}!`}");
-  })
+app.get('/', function (req, res) {
+  res.send("OK");
+});
   `);
 
-  const res = await fetch(`http://localhost:${PORT}`);
+  const res = await fetch(`http://localhost:${worker.port}`);
   const text = await res.text()
-  worker.kill("SIGINT");
+  worker.process.kill("SIGINT");
 
   t.assert(text === "OK");
   t.assert(res.status === 200);
