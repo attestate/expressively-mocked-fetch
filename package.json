@@ -15,7 +15,8 @@
   ],
   "author": "Tim Daubenschütz <tim@daubenschuetz.de> (https://timdaub.github.io)",
   "dependencies": {
-    "express": "4.17.1"
+    "express": "4.17.1",
+    "uuid": "8.2.0"
   },
   "devDependencies": {
     "ava": "3.10.1",

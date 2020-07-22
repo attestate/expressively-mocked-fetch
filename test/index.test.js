@@ -6,7 +6,6 @@ const fetch = require('cross-fetch');
 
 const createWorker = require("../src/index.js");
 
-const fileName = ".expressively-mocked-fetch-tmp";
 
 test("if module is loaded and executed", async t => {
   const worker = await createWorker(`
@@ -20,7 +19,7 @@ app.get('/', function (req, res) {
 
   t.assert(text === "OK");
   t.assert(res.status === 200);
-  t.assert(!existsSync(fileName));
+  t.assert(!existsSync(worker.fileName));
   const processes = spawnSync("ps", ["-ax"]);
-  t.assert(!processes.stdout.toString().includes(fileName));
+  t.assert(!processes.stdout.toString().includes(worker.fileName));
 });

@@ -1,10 +1,11 @@
 // @format
 const { writeFileSync, unlinkSync, existsSync } = require("fs");
-const fork = require("child_process").fork;
+const { fork } = require("child_process");
+const uuidv4 = require("uuid").v4;
+
 const { once } = require("events");
 const express = require("express");
 
-const fileName = ".expressively-mocked-fetch-tmp";
 const template = fn => `
 const express = require('express');
 const app = express();
@@ -19,7 +20,9 @@ let server = app.listen(0, function () {
 `;
 
 async function createWorker(fn) {
+  const fileName = `.${uuidv4()}`;
   let worker = {};
+
   writeFileSync(fileName, template(fn));
 
   const child = fork(fileName, {
@@ -35,7 +38,8 @@ async function createWorker(fn) {
 
   return {
     process: child,
-    port
+    port,
+    fileName
   };
 }
 
