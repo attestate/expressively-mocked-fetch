@@ -1,5 +1,7 @@
 # expressively-mocked-fetch
 
+[![npm version](https://badge.fury.io/js/expressively-mocked-fetch.svg)](https://badge.fury.io/js/expressively-mocked-fetch)
+
 > A fetch mock that launches express as a child_process to help testing.
 
 ## Installation
