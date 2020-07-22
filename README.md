@@ -26,6 +26,10 @@ See [test file](./test/index.test.js).
 
 ## Changelog
 
+### 0.0.2
+
+- Bug fix: Create new module file for each worker to allow running in parallel
+
 ### 0.0.1
 
 - Initial release
