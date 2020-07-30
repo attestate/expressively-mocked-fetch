@@ -6,12 +6,16 @@ const uuidv4 = require("uuid").v4;
 const { once } = require("events");
 const express = require("express");
 
-const template = fn => `
+const template = (fn, defaultCount) => `
 const express = require('express');
 const app = express();
+let count = 0;
 app.use(function(req, res, next) {
+  count++;
   next();
-  process.exit();
+  if (count === ${defaultCount}) {
+    process.exit();
+  }
 });
 ${fn}
 let server = app.listen(0, function () {
@@ -19,11 +23,12 @@ let server = app.listen(0, function () {
 })
 `;
 
-async function createWorker(fn) {
+async function createWorker(fn, defaultCount = 1) {
   const fileName = `.${uuidv4()}`;
   let worker = {};
 
-  writeFileSync(fileName, template(fn));
+  const file = template(fn, defaultCount);
+  writeFileSync(fileName, file);
 
   const child = fork(fileName, {
     cwd: process.cwd(),
