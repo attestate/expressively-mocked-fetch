@@ -28,6 +28,10 @@ See [test file](./test/index.test.js).
 
 ## Changelog
 
+### 0.0.3
+
+- Allow `defaultCount` option allows a worker to exist for more than 1 request.
+
 ### 0.0.2
 
 - Bug fix: Create new module file for each worker to allow running in parallel
