@@ -13,9 +13,7 @@ $ npm i -D expressively-mocked-fetch
 ## Why
 
 [Mocking fetch is annoying](https://kentcdodds.com/blog/stop-mocking-fetch).  I
-saw [msw](https://github.com/mswjs/msw). But it was [too
-static](https://github.com/mswjs/msw/issues/287) for me. Also: Why reimplement
-a whole API (express.js), when you can just use it...
+saw [msw](https://github.com/mswjs/msw). But it [didn't fit my use case](https://github.com/mswjs/msw/issues/287). So I ended up writing a wrapper around express.js.
 
 ## Develop
 
