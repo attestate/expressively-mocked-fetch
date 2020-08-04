@@ -22,7 +22,23 @@ saw [msw](https://github.com/mswjs/msw). But it [didn't fit my use case](https:/
 
 ## Usage
 
-See [test file](./test/index.test.js).
+```js
+// with ava
+const test = require("ava");
+const createWorker = require("expressively-mocked-fetch");
+
+test("if module is loaded and executed", async t => {
+  const worker = await createWorker(`
+// regular express.js code
+app.get('/', function (req, res) {
+  res.send("hello world");
+});
+  `);
+
+  const res = await fetch(`http://localhost:${worker.port}`);
+  const text = await res.text();
+  t.assert(test === "hello world");
+});
 
 ## Changelog
 
