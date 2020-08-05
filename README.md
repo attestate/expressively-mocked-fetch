@@ -39,7 +39,7 @@ app.get('/', function (req, res) {
   const text = await res.text();
   t.assert(test === "hello world");
 });
-
+```
 
 ## Changelog
 
