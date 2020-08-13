@@ -10,6 +10,9 @@ const template = (fn, defaultCount) => `
 const express = require('express');
 const app = express();
 let count = 0;
+
+app.use(express.text());
+app.use(express.json());
 app.use(function(req, res, next) {
   count++;
   next();
@@ -19,7 +22,8 @@ app.use(function(req, res, next) {
 });
 ${fn}
 let server = app.listen(0, function () {
-  process.send("PORT:"+server.address().port);
+  const port = server.address().port;
+  process.send("PORT:"+port);
 })
 `;
 
