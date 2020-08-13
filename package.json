@@ -1,6 +1,6 @@
 {
   "name": "expressively-mocked-fetch",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A fetch mock that launches express as a child_process",
   "main": "src/index.js",
   "scripts": {

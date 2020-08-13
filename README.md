@@ -43,9 +43,13 @@ app.get('/', function (req, res) {
 
 ## Changelog
 
+### 0.1.1
+
+- Add support for `Content-Type: text/calendar` and potentially other types.
+
 ### 0.1.0
 
-- Allow accepting `text/plain` and `application/json`
+- Allow accepting `text/plain` and `application/json`.
 
 ### 0.0.3
 
@@ -53,7 +57,7 @@ app.get('/', function (req, res) {
 
 ### 0.0.2
 
-- Bug fix: Create new module file for each worker to allow running in parallel
+- Bug fix: Create new module file for each worker to allow running in parallel.
 
 ### 0.0.1
 
