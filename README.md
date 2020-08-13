@@ -28,6 +28,10 @@ See [test file](./test/index.test.js).
 
 ## Changelog
 
+### 0.1.0
+
+- Allow accepting `text/plain` and `application/json`
+
 ### 0.0.3
 
 - Allow `defaultCount` option allows a worker to exist for more than 1 request.
