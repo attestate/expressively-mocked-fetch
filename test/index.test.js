@@ -56,7 +56,7 @@ app.post('/', function (req, res) {
 });
   `
   );
-  const body = JSON.stringify({ hello: "world" });
+  const body = "hello";
   const res = await fetch(`http://localhost:${worker.port}`, {
     method: "POST",
     body
@@ -83,4 +83,24 @@ test("reacting to a response json body", async t => {
   });
   const obj = await res.json();
   t.deepEqual(obj, body);
+});
+
+test("reacting to a response text/calendar body", async t => {
+  const worker = await createWorker(
+    `
+  app.post('/', function (req, res, next) {
+      res.send(req.body)
+  })
+`
+  );
+  const body = `BEGIN:CALENDAR
+    END:CALENDAR`;
+  const res = await fetch(`http://localhost:${worker.port}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "text/calendar; charset=utf-8"
+    },
+    body
+  });
+  t.assert(body === (await res.text()));
 });

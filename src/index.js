@@ -8,11 +8,14 @@ const express = require("express");
 
 const template = (fn, defaultCount) => `
 const express = require('express');
+const bodyParser = require("body-parser");
 const app = express();
 let count = 0;
 
 app.use(express.text());
 app.use(express.json());
+// NOTE: Library is adjustable to other Content-Types
+app.use(bodyParser.raw({ type: 'text/calendar' }))
 app.use(function(req, res, next) {
   count++;
   next();
