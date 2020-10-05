@@ -8,20 +8,19 @@ const fetch = require("cross-fetch");
 const createWorker = require("../src/index.js");
 
 test("if module is loaded and executed", async t => {
-  const worker = await createWorker(`
-app.get('/', function (req, res) {
-  res.send("OK");
-});
-  `);
+  const worker = await createWorker(app => {
+    app.get("/", function(req, res) {
+      res.send("OK");
+    });
+  });
 
   const res = await fetch(`http://localhost:${worker.port}`);
+  console.log(worker);
   const text = await res.text();
 
+  t.assert(worker.port);
   t.assert(text === "OK");
   t.assert(res.status === 200);
-  t.assert(!existsSync(worker.fileName));
-  const processes = spawnSync("ps", ["-ax"]);
-  t.assert(!processes.stdout.toString().includes(worker.fileName));
 });
 
 test("if server remains up with overwritten defaultCount option", async t => {
