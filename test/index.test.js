@@ -13,10 +13,11 @@ test("if module is loaded and executed", async t => {
       res.send("OK");
     });
   });
+  console.log(worker);
 
   const res = await fetch(`http://localhost:${worker.port}`);
-  console.log(worker);
   const text = await res.text();
+  console.log("this never launches");
 
   t.assert(worker.port);
   t.assert(text === "OK");
@@ -26,11 +27,10 @@ test("if module is loaded and executed", async t => {
 test("if server remains up with overwritten defaultCount option", async t => {
   const counts = 3;
   const worker = await createWorker(
-    `
-app.get('/', function (req, res) {
-  res.send("OK");
-});
-  `,
+    app =>
+      app.get("/", function(req, res) {
+        res.send("OK");
+      }),
     counts
   );
 
@@ -48,12 +48,10 @@ app.get('/', function (req, res) {
 });
 
 test("reacting to a response text body", async t => {
-  const worker = await createWorker(
-    `
-app.post('/', function (req, res) {
-  res.send(req.body);
-});
-  `
+  const worker = await createWorker(app =>
+    app.post("/", function(req, res) {
+      res.send(req.body);
+    })
   );
   const body = "hello";
   const res = await fetch(`http://localhost:${worker.port}`, {
@@ -65,12 +63,10 @@ app.post('/', function (req, res) {
 });
 
 test("reacting to a response json body", async t => {
-  const worker = await createWorker(
-    `
-  app.post('/', function (req, res, next) {
-      res.json(req.body)
-  })
-`
+  const worker = await createWorker(app =>
+    app.post("/", function(req, res, next) {
+      res.json(req.body);
+    })
   );
   const body = { hello: "world" };
   const res = await fetch(`http://localhost:${worker.port}`, {
@@ -85,12 +81,10 @@ test("reacting to a response json body", async t => {
 });
 
 test("reacting to a response text/calendar body", async t => {
-  const worker = await createWorker(
-    `
-  app.post('/', function (req, res, next) {
-      res.send(req.body)
-  })
-`
+  const worker = await createWorker(app =>
+    app.post("/", function(req, res, next) {
+      res.send(req.body);
+    })
   );
   const body = `BEGIN:CALENDAR
     END:CALENDAR`;

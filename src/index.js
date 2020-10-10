@@ -3,10 +3,11 @@ const { writeFileSync, unlinkSync, existsSync } = require("fs");
 const { fork } = require("child_process");
 const uuidv4 = require("uuid").v4;
 
-const { once } = require("events");
+const { EventEmitter, once } = require("events");
 const express = require("express");
 
-const template = async (fn, defaultCount) => {
+const template = (fn, defaultCount) => {
+  const emitter = new EventEmitter();
   const express = require("express");
   const bodyParser = require("body-parser");
   const app = express();
@@ -26,23 +27,27 @@ const template = async (fn, defaultCount) => {
 
   fn(app);
 
-  return new Promise(resolve => {
+  const launch = () => {
     let server = app.listen(0, function() {
       const port = server.address().port;
-      console.log("PORT:" + port);
-      return resolve(port);
+      emitter.emit("port", port);
     });
-  });
+  };
+  return {
+    emitter,
+    launch
+  };
 };
 
 async function createWorker(fn, defaultCount = 1) {
   let worker = {};
 
-  const port = await template(fn, defaultCount);
+  const { launch, emitter } = template(fn, defaultCount);
+  const portPromise = once(emitter, "port");
+  launch();
+  const [port] = await portPromise;
 
-  return {
-    port
-  };
+  return { port };
 }
 
 module.exports = createWorker;
