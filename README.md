@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/expressively-mocked-fetch.svg)](https://badge.fury.io/js/expressively-mocked-fetch)
 
-> A fetch mock that launches express as a child_process to help testing.
+> A fetch mock that launches express as a worker_thread to help testing.
 
 ## Installation
 
@@ -42,6 +42,12 @@ app.get('/', function (req, res) {
 ```
 
 ## Changelog
+
+### 0.1.2
+
+- Using node.js's `worker_threads` now allows expressively-mocked-fetch to
+  spawn threads without the usage of temporary files. Interface remains the
+  same.
 
 ### 0.1.1
 
