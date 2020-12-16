@@ -6,6 +6,9 @@
 
 ## Installation
 
+**NOTE:** This library uses `worker_threads`, a nodejs builtin that was released
+with node v13.
+
 ```bash
 $ npm i -D expressively-mocked-fetch
 ```
