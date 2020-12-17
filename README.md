@@ -55,6 +55,11 @@ app.get('/', function (req, res) {
 
 ## Changelog
 
+### 0.2.1
+
+- (Bug fix): `options` allows now to set individual keys without forgetting
+  all default options.
+
 ### 0.2.0
 
 - Refactor `createWorker` function signature to allow an options object.

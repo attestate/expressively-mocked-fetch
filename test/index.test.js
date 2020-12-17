@@ -1,6 +1,7 @@
 // @format
 const { existsSync } = require("fs");
 const spawnSync = require("child_process").spawnSync;
+const proxyquire = require("proxyquire");
 
 const test = require("ava");
 const fetch = require("cross-fetch");
@@ -121,4 +122,27 @@ app.get('/', function (req, res) {
 
   t.assert(text === "OK");
   t.assert(res.status === 200);
+});
+
+test("make sure that for a fn signature with a default object, all default options are set when a custom option is inserted", async t => {
+  const requestCount = "requestCount";
+
+  let workerCalled = false;
+  const { EventEmitter } = require("events");
+  class Worker extends EventEmitter {
+    constructor(code, options) {
+      super();
+      t.assert(code.includes("app.listen(0"));
+      t.assert(code.includes(requestCount));
+      workerCalled = true;
+    }
+  }
+  const createWorkerMock = proxyquire("../src/index.js", {
+    "worker_threads": {
+      Worker
+    }
+  });
+
+  createWorkerMock("", { requestCount });
+  t.true(workerCalled);
 });

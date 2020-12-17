@@ -30,7 +30,9 @@ let server = app.listen(${options.port}, function () {
 })
 `;
 
-async function createWorker(fn, options = { requestCount: 1, port: 0 }) {
+const defaultOptions = { requestCount: 1, port: 0 };
+async function createWorker(fn, options) {
+  options = { ...defaultOptions, ...options };
   const entry = template(fn, options);
   const worker = new Worker(entry, { eval: true });
 

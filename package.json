@@ -1,6 +1,6 @@
 {
   "name": "expressively-mocked-fetch",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A fetch mock that launches express as a worker_thread",
   "main": "src/index.js",
   "scripts": {
@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "ava": "3.10.1",
-    "cross-fetch": "3.0.6"
+    "cross-fetch": "3.0.6",
+    "proxyquire": "2.1.3"
   }
 }
