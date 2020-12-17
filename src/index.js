@@ -9,7 +9,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const { parentPort } = require('worker_threads');
 
-const app = express();
+let app = express();
 let count = 0;
 
 app.use(express.text());

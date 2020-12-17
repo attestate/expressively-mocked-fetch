@@ -55,6 +55,10 @@ app.get('/', function (req, res) {
 
 ## Changelog
 
+### 0.2.2
+
+- Allow template's `app` to be overwritten by using `let`.
+
 ### 0.2.1
 
 - (Bug fix): `options` allows now to set individual keys without forgetting
