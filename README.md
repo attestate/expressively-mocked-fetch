@@ -44,7 +44,22 @@ app.get('/', function (req, res) {
 });
 ```
 
+### createWorker(string, object)
+
+- `string` needs to be valid Node.js JavaScript
+- object is of shape `{ requestCount: Number, port: Number }`, where:
+  - `requestCount` (optional, default: 1) is the amount of times a server
+    should respond before automatically shutting itself.
+  - `port` (optional, default: 0) is the desired port the server should
+    launch at. For dynamic allocation by the OS, use the default value `0`.
+
 ## Changelog
+
+### 0.2.0
+
+- Refactor `createWorker` function signature to allow an options object.
+- Add `port` to `options` that allows a user to define a port before
+  launching a worker.
 
 ### 0.1.2
 

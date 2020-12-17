@@ -25,14 +25,14 @@ app.get('/', function (req, res) {
 });
 
 test("if server remains up with overwritten defaultCount option", async t => {
-  const counts = 3;
+  const requestCount = 3;
   const worker = await createWorker(
     `
 app.get('/', function (req, res) {
   res.send("OK");
 });
   `,
-    counts
+    { requestCount }
   );
 
   const requests = await Promise.all([
@@ -103,4 +103,22 @@ test("reacting to a response text/calendar body", async t => {
     body
   });
   t.assert(body === (await res.text()));
+});
+
+test("if pre-defined port option launched server at port", async t => {
+  const customPort = 6666;
+  const worker = await createWorker(
+    `
+app.get('/', function (req, res) {
+  res.send("OK");
+});
+  `,
+    { port: customPort }
+  );
+
+  const res = await fetch(`http://localhost:${customPort}`);
+  const text = await res.text();
+
+  t.assert(text === "OK");
+  t.assert(res.status === 200);
 });
