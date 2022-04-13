@@ -98,4 +98,4 @@ app.get('/', function (req, res) {
 
 ## LICENSE
 
-[WIP]
+See LICENSE file.
