@@ -2,7 +2,6 @@
 const { Worker } = require("worker_threads");
 
 const { once } = require("events");
-const express = require("express");
 
 const template = (fn, options) => `
 const express = require("express");
@@ -11,6 +10,11 @@ const { parentPort } = require('worker_threads');
 
 let app = express();
 let count = 0;
+
+if (${options.pauseMilliseconds} > 0) {
+  const pause = require('connect-pause');
+  app.use(pause(${options.pauseMilliseconds}));
+}
 
 app.use(express.text());
 app.use(express.json());
@@ -30,7 +34,7 @@ let server = app.listen(${options.port}, function () {
 })
 `;
 
-const defaultOptions = { requestCount: 1, port: 0 };
+const defaultOptions = { requestCount: 1, port: 0, pauseMilliseconds: 0 };
 async function createWorker(fn, options) {
   options = { ...defaultOptions, ...options };
   const entry = template(fn, options);
@@ -42,7 +46,7 @@ async function createWorker(fn, options) {
 
   return {
     process: worker,
-    port
+    port,
   };
 }
 
