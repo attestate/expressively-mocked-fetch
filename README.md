@@ -15,7 +15,7 @@ $ npm i -D expressively-mocked-fetch
 
 ## Why
 
-[Mocking fetch is annoying](https://kentcdodds.com/blog/stop-mocking-fetch).  I
+[Mocking fetch is annoying](https://kentcdodds.com/blog/stop-mocking-fetch). I
 saw [msw](https://github.com/mswjs/msw). But it [didn't fit my use case](https://github.com/mswjs/msw/issues/287). So I ended up writing a wrapper around express.js.
 
 ## Develop
@@ -30,7 +30,7 @@ saw [msw](https://github.com/mswjs/msw). But it [didn't fit my use case](https:/
 const test = require("ava");
 const createWorker = require("expressively-mocked-fetch");
 
-test("if module is loaded and executed", async t => {
+test("if module is loaded and executed", async (t) => {
   const worker = await createWorker(`
 // regular express.js code
 app.get('/', function (req, res) {
@@ -48,10 +48,14 @@ app.get('/', function (req, res) {
 
 - `string` needs to be valid Node.js JavaScript
 - object is of shape `{ requestCount: Number, port: Number }`, where:
+
   - `requestCount` (optional, default: 1) is the amount of times a server
     should respond before automatically shutting itself.
   - `port` (optional, default: 0) is the desired port the server should
     launch at. For dynamic allocation by the OS, use the default value `0`.
+  - `pauseMilliseconds` (optional, default: 0) the time in milliseconds a
+    server must delay sending an answer using
+    [connect-pause](https://github.com/flesler/connect-pause).
 
 ## Changelog
 
