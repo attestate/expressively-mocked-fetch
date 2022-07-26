@@ -59,6 +59,11 @@ app.get('/', function (req, res) {
 
 ## Changelog
 
+### 0.2.3
+
+- Introduce optional option `pauseMilliseconds` that allows simulating a
+  server's delayed response-ability.
+
 ### 0.2.2
 
 - Allow template's `app` to be overwritten by using `let`.
