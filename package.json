@@ -1,6 +1,6 @@
 {
   "name": "expressively-mocked-fetch",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "license": "GPL-3.0-only",
   "description": "A fetch mock that launches express as a worker_thread",
   "main": "src/index.js",
